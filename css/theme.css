@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-h2 {
+h2, h3 {
 	padding-top: 0px;
 	margin-top:0px;
 }
@@ -32,4 +32,9 @@ h6,  h4 {
 .center_vertical{
 	vertical-align:middle;
 	display: inline-block;
+}
+
+.prompt{
+    color: #d9d9d9;
+	
 }

@@ -44,26 +44,25 @@
       </div><!-- /.col-lg-6 -->
 
       <!-- Prompt Graphics -->
-      <div class="col-lg-2">
-        <p class="pull-left">Search a Topic!</p>
-        <div class="pull-right blink">
+      <div class="col-lg-2 prompt">
+        <h3 class="pull-left">Enter a Topic!</h3>
+        <span class="pull-right blink">
           <span class="glyphicon glyphicon-chevron-right"></span>
           <span class="glyphicon glyphicon-chevron-right"></span>
           <span class="glyphicon glyphicon-chevron-right"></span>
-        </div>
+        </span>
       </div>
 
       <!--  Search Bar -->
-      <div class="col-lg-6">
+      <div class="col-lg-6 ">
           <div class="input-group">
-            <input type="text" class="form-control" ng-model="search_term"
+            <input type="text" class="form-control " ng-model="search_term"
               ng-minlength="1" placeholder="Search for..."> 
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" 
                 ng-click="sendPost()">Go!</button>
             </span>
           </div><!-- /input-group -->
-        </form><!-- /form -->
       </div><!-- /.col-lg-6 -->
     </div><!-- /.jumbotron -->
   </section>
@@ -71,10 +70,9 @@
   <!-- Query Results Section -->
   <section>
     <div class="col-lg-6">
-      <ul>
-        {[text]}
-        <li ng-if="stati" ng-repeat="stat in stati">{[ stat ]}</li>
-      </ul>
+      <div class="panel panel-default" ng-if="stati" ng-repeat="stat in stati">
+        {[ stat ]}
+      </div>
     </div><!-- /.col-lg-6 -->
   </section>
 

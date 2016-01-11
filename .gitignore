@@ -23,6 +23,7 @@ pip-log.txt
 .pydevproject
 .project
 .settings*
+.metadata*
 
 # Mac
 .DS_*

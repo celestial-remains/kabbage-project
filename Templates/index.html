@@ -1,0 +1,70 @@
+{% extends "/base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <script type="text/javascript">
+
+       // Declare and Configure app
+       var app = angular.module('searchApp', []);
+       app.config(['$interpolateProvider', function($interpolateProvider) {
+        $interpolateProvider.startSymbol('{[');
+        $interpolateProvider.endSymbol(']}');
+       }]);
+
+      // Define functionality of app
+       app.controller('myCtrl', function($scope,$http) {
+          $scope.sendPost = function() {
+              console.log("search_term" + $scope.search_term);
+              $http.post("/", {text:$scope.search_term}).then(function(response){
+                 console.log(response.data);
+                 $scope.stati = response.data.stati;
+                 $scope.error_message = response.data.error_message;
+               });
+           };//end find
+        });//end controller
+
+  </script>
+{% endblock %}
+
+
+{% block content %}
+
+  <!-- Implementation of Search App -->
+<div ng-app="searchApp" ng-controller="myCtrl">
+  <section>
+    <div class="jumbotron clearfix">
+ 
+      <!-- Page Title -->
+      <div class="col-lg-6">
+        <h2>{{site_name}}</h2>
+          <h6 ng-if="error_message" class="warning"><span class="glyphicon glyphicon-alert"></span> {[error_message]}</h6>
+      </div><!-- /.col-lg-6 -->
+
+      <!--  Search Bar -->
+      <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="search_term"
+              ng-minlength="1" placeholder="Search for..."> 
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" 
+                ng-click="sendPost()">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+        </form><!-- /form -->
+      </div><!-- /.col-lg-6 -->
+
+    </div><!-- /.jumbotron -->
+  </section>
+
+  <!-- Query Results -->
+  <section>
+    <div class="col-lg-6">
+      <ul>
+        {[text]}
+        <li ng-if="stati" ng-repeat="stat in stati">{[ stat ]}</li>
+      </ul>
+    </div><!-- /.col-lg-6 -->
+  </section>
+
+</div><!-- /ng-app -->
+{% endblock %}

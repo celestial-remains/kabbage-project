@@ -1,2 +1,3 @@
 from twitter_search import TwitterSearch
-__all__=[TwitterSearch]
+from wiki_search import WikiSearch
+__all__=[TwitterSearch, WikiSearch]

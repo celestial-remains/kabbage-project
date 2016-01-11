@@ -7,7 +7,7 @@ import json
 import webapp2
 import urllib
 from config import config
-from common import TwitterSearch
+from common import TwitterSearch, WikiSearch
 # Set path to Templates
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__),
@@ -30,7 +30,8 @@ class IndexHandler(webapp2.RequestHandler):
     def post(self):
         self.error_message = None
         self.stati = None
-
+        self.wiki_results = None
+        self.error_message_wiki = None
         # Process input
         if self.request.body:
             request_body = json.loads(self.request.body)
@@ -52,12 +53,31 @@ class IndexHandler(webapp2.RequestHandler):
                                 "Twitter is having some technical problems.."
                     except Exception as e:
                         self.error_message = str(e)
+                    
+
+                    # Make call to wiki
+                    try: 
+                        wiki_results = WikiSearch.search(user_input)
+                        try:
+                            if len(wiki_results)>0:
+                                self.wiki_results = wiki_results
+                            else:
+                                self.error_message_wiki = \
+                                    "No one knows about that topic.."
+                        except Exception as e:
+                            self.error_message_wiki = \
+                                "Wiki is having some technical problems.."
+                    except Exception as e:
+                        self.error_message_wiki = str(e)
+
                 else :
                      self.error_message = "Enter something.."
         # Return results
         data = {
             "error_message": self.error_message,
-            "stati": self.stati
+            "stati": self.stati,
+            "wiki_results":self.wiki_results,
+            "error_message_wiki":self.error_message_wiki
         }
         self.response.out.write(json.dumps(data))
 

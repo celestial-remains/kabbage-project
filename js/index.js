@@ -21,6 +21,7 @@ function($scope,$http, $cookies) {
 		$http.post("/", {text:$scope.search_term}).then(function(response){
 			$scope.stati = response.data.stati;
 			$scope.error_message = response.data.error_message;
+			$scope.error_message_wiki=response.data.error_message_wiki;
 		});//end response and post
 	};//end sendPost
 
@@ -32,6 +33,8 @@ function($scope,$http, $cookies) {
 			$http.post("/", {text:search_term}).then(function(response){
 				$scope.stati = response.data.stati;
 				$scope.error_message = response.data.error_message;
+				$scope.error_message_wiki=response.data.error_message_wiki;
+				$scope.wiki_results = response.data.wiki_results;
 				$scope.search_term = search_term;
 			});//end response and post
 		}

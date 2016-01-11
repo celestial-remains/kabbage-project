@@ -2,34 +2,12 @@
 {% block title %}Index{% endblock %}
 {% block head %}
   {{ super() }}
-  <script type="text/javascript">
-
-       // Declare and Configure app
-       var app = angular.module('searchApp', []);
-       app.config(['$interpolateProvider', function($interpolateProvider) {
-        $interpolateProvider.startSymbol('{[');
-        $interpolateProvider.endSymbol(']}');
-       }]);
-
-      // Define functionality of app
-       app.controller('myCtrl', function($scope,$http) {
-          $scope.sendPost = function() {
-              console.log("search_term" + $scope.search_term);
-              $http.post("/", {text:$scope.search_term}).then(function(response){
-                 console.log(response.data);
-                 $scope.stati = response.data.stati;
-                 $scope.error_message = response.data.error_message;
-               });
-           };//end find
-        });//end controller
-
-  </script>
+  <script type="text/javascript" src="../js/index.js"></script>
 {% endblock %}
-
 
 {% block content %}
 
-  <!-- Implementation of Search App -->
+<!-- Implementation of Search App -->
 <div ng-app="searchApp" ng-controller="myCtrl">
 
   <!-- Search Section -->
@@ -38,12 +16,12 @@
 
       <!-- Site Info -->
       <div class="col-lg-4">
-        <h2>{{site_name}}</h2>
+        <h1>{{site_name}}</h1>
         <h4>{{site_description}}</h4>
           <h6 ng-if="error_message" class="warning"><span class="glyphicon glyphicon-alert"></span> {[error_message]}</h6>
       </div><!-- /.col-lg-6 -->
 
-      <!-- Prompt Graphics -->
+      <!-- Prompt  -->
       <div class="col-lg-2 prompt">
         <h3 class="pull-left">Enter a Topic!</h3>
         <span class="pull-right blink">
@@ -56,7 +34,8 @@
       <!--  Search Bar -->
       <div class="col-lg-6 ">
           <div class="input-group">
-            <input type="text" class="form-control " ng-model="search_term"
+            <input type="text" ng-keyup="$event.keyCode == 13 && sendPost()"
+              class="form-control " ng-model="search_term"
               ng-minlength="1" placeholder="Search for..."> 
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" 
@@ -65,16 +44,27 @@
           </div><!-- /input-group -->
       </div><!-- /.col-lg-6 -->
     </div><!-- /.jumbotron -->
-  </section>
+  </section><!-- /search section -->
 
   <!-- Query Results Section -->
   <section>
+
+    <!-- Twitter Results -->
     <div class="col-lg-6">
-      <div class="panel panel-default" ng-if="stati" ng-repeat="stat in stati">
-        {[ stat ]}
-      </div>
+     <h2>Twitter</h2>
+      <ul class="pull-left">
+        <li ng-if="stati" ng-repeat="stat in stati track by $index">
+          {[ stat ]}
+        </li>
+      </ul>
     </div><!-- /.col-lg-6 -->
-  </section>
+
+    <!-- Wiki Results -->
+    <div class="col-lg-6">
+      <h2 >Wikipedia</h2>
+    </div>
+
+  </section><!-- /Query Results Section -->
 
 </div><!-- /ng-app -->
 {% endblock %}

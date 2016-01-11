@@ -46,7 +46,7 @@ class IndexHandler(webapp2.RequestHandler):
                                 self.stati = stats
                             else:
                                 self.error_message = \
-                                    ["No one seems to care about that topic.."]
+                                    "No one seems to care about that topic.."
                         except Exception as e:
                             self.error_message = \
                                 "Twitter is having some technical problems.."

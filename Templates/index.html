@@ -31,14 +31,27 @@
 
   <!-- Implementation of Search App -->
 <div ng-app="searchApp" ng-controller="myCtrl">
+
+  <!-- Search Section -->
   <section>
-    <div class="jumbotron clearfix">
- 
-      <!-- Page Title -->
-      <div class="col-lg-6">
+   <div class="jumbotron clearfix">
+
+      <!-- Site Info -->
+      <div class="col-lg-4">
         <h2>{{site_name}}</h2>
+        <h4>{{site_description}}</h4>
           <h6 ng-if="error_message" class="warning"><span class="glyphicon glyphicon-alert"></span> {[error_message]}</h6>
       </div><!-- /.col-lg-6 -->
+
+      <!-- Prompt Graphics -->
+      <div class="col-lg-2">
+        <p class="pull-left">Search a Topic!</p>
+        <div class="pull-right blink">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+      </div>
 
       <!--  Search Bar -->
       <div class="col-lg-6">
@@ -52,11 +65,10 @@
           </div><!-- /input-group -->
         </form><!-- /form -->
       </div><!-- /.col-lg-6 -->
-
     </div><!-- /.jumbotron -->
   </section>
 
-  <!-- Query Results -->
+  <!-- Query Results Section -->
   <section>
     <div class="col-lg-6">
       <ul>

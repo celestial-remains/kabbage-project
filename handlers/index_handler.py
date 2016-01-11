@@ -22,6 +22,7 @@ class IndexHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
             "site_name": config["site"]["site_name"],
+            "site_description": config["site"]["site_description"],
         }
         template = JINJA_ENVIRONMENT.get_template('index.html')
         self.response.out.write(template.render(template_values))
@@ -36,16 +37,23 @@ class IndexHandler(webapp2.RequestHandler):
             if "text" in request_body:
                 user_input = request_body["text"]
                 if len(user_input) > 0:
+
                     # Make call to twitter search api with user input
                     try:
-                        statuses = TwitterSearch.search(user_input)
-                        self.stati = statuses
+                        stats = TwitterSearch.search(user_input)
+                        try:
+                            if len(stats)>0:
+                                self.stati = stats
+                            else:
+                                self.error_message = \
+                                    ["No one seems to care about that topic.."]
+                        except Exception as e:
+                            self.error_message = \
+                                "Twitter is having some technical problems.."
                     except Exception as e:
-                        self.stati = None
                         self.error_message = str(e)
                 else :
                      self.error_message = "Enter something.."
-
         # Return results
         data = {
             "error_message": self.error_message,

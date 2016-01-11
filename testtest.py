@@ -48,6 +48,7 @@ class IndexTest(unittest.TestCase):
         print TwitterSearch.search("@")
         print TwitterSearch.search("@james")
         print TwitterSearch.search("#help")
+        print TwitterSearch.search("")
 
 if __name__ == '__main__':
     unittest.main()

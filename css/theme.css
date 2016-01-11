@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+h2 {
+	padding-top: 0px;
+	margin-top:0px;
+}
+.jumbotron{
+	background-color:#333366;
+	color:#CCFFFF;
+}
+
+h6,  h4 {
+	color: #d9d9d9;
+}
+
+.blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: 6;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.center_vertical{
+	vertical-align:middle;
+	display: inline-block;
+}

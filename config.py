@@ -11,6 +11,7 @@ config["twitter"] = {
     "access_token_secret" : "x7JqeE87lpGbA4ry8Kk0SZWewYooWrpzRu0DkzlE2gAHg"
      }
 config["site"] = {
-    "site_name": "Twiki"
+    "site_name": "Twiki",
+    "site_description": "Get the latest from Twitter and Wikipedia!"
 
     }

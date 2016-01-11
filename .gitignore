@@ -17,12 +17,12 @@ develop-eggs
 # Installer logs
 pip-log.txt
 
-
 # IDEs
 .DS_Store
 .pydevproject
 .project
 .settings*
+.metadata*
 
 # Mac
 .DS_*

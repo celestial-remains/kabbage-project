@@ -15,6 +15,14 @@ class WikiSearch():
     @classmethod
     def search(cls,user_input):
         try:
-            return wikipedia.search(user_input)
+            search_results = wikipedia.search(user_input)
+            wiki_results = []
+            for result in search_results:
+                try:
+                    page = wikipedia.page(result)
+                    wiki_results.append({"title": page.title, "url": page.url})
+                except wikipedia.exceptions.WikipediaException as e:
+                    pass
+            return wiki_results
         except Exception as e:
-            return e
+            return None

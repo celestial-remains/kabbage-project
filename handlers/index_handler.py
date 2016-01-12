@@ -29,7 +29,7 @@ class IndexHandler(webapp2.RequestHandler):
 
     def post(self):
         self.error_message = None
-        self.stati = None
+        self.tweets = None
         self.wiki_results = None
         self.error_message_wiki = None
         # Process input
@@ -41,10 +41,10 @@ class IndexHandler(webapp2.RequestHandler):
 
                     # Make call to twitter search api with user input
                     try:
-                        stats = TwitterSearch.search(user_input)
+                        tweets = TwitterSearch.search(user_input)
                         try:
-                            if len(stats)>0:
-                                self.stati = stats
+                            if len(tweets)>0:
+                                self.tweets = tweets
                             else:
                                 self.error_message = \
                                     "No one seems to care about that topic.."
@@ -58,24 +58,23 @@ class IndexHandler(webapp2.RequestHandler):
                     # Make call to wiki
                     try: 
                         wiki_results = WikiSearch.search(user_input)
-                        try:
+                        if wiki_results is not None:
                             if len(wiki_results)>0:
                                 self.wiki_results = wiki_results
                             else:
                                 self.error_message_wiki = \
                                     "No one knows about that topic.."
-                        except Exception as e:
+                        else:
                             self.error_message_wiki = \
                                 "Wiki is having some technical problems.."
                     except Exception as e:
                         self.error_message_wiki = str(e)
-
                 else :
                      self.error_message = "Enter something.."
         # Return results
         data = {
             "error_message": self.error_message,
-            "stati": self.stati,
+            "tweets": self.tweets,
             "wiki_results":self.wiki_results,
             "error_message_wiki":self.error_message_wiki
         }

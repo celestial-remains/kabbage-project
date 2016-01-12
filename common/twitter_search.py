@@ -28,10 +28,10 @@ class TwitterSearch():
         try:
             api = cls.get_api()
             search_query = urllib.urlencode({"term": user_input})
-            stati = api.GetSearch(search_query)
-            statuses = []
-            for stat in stati:
-                statuses.append(stat.text)
-            return statuses
+            stats = api.GetSearch(search_query)
+            tweets = []
+            for tweet in stats:
+                tweets.append(tweet.text)
+            return tweets
         except Exception as e:
             return e

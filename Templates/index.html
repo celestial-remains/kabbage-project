@@ -18,12 +18,12 @@
       <div class="col-lg-4">
         <h1>{{site_name}}</h1>
         <h4>{{site_description}}</h4>
-      </div><!-- /.col-lg-6 -->
+      </div><!-- /.col-lg-4 -->
 
       <!-- Prompt  -->
-      <div class="col-lg-2 prompt">
+      <div class="col-lg-2 prompt clearfix">
         <h3 class="pull-left">Enter a Topic!</h3>
-        <span class="pull-right blink">
+        <span class="pull-left blink">
           <span class="glyphicon glyphicon-chevron-right"></span>
           <span class="glyphicon glyphicon-chevron-right"></span>
           <span class="glyphicon glyphicon-chevron-right"></span>
@@ -49,23 +49,29 @@
   <section>
 
     <!-- Twitter Results -->
-    <div class="col-lg-6">
-     <h2>Twitter</h2>
-     <h6 ng-if="error_message" class="warning"><span class="glyphicon glyphicon-alert"></span> {[error_message]}</h6>
-      <ul class="pull-left">
-        <li ng-if="stati" ng-repeat="stat in stati track by $index">
-          {[ stat ]}
+    <div class="col-lg-6 results_col">
+     <h3><i class="fa fa-3x fa-twitter"></i> Twitter</h3>
+     <h5 ng-if="error_message" class="warning"><span class="glyphicon glyphicon-alert"></span> {[error_message]}</h5>
+     <div  ng-if="!error_message" class="text-center" ng-show="loadData">
+       Loading.. <i class="fa fa-spinner fa-5x fa-spin"></i>
+     </div>
+      <ul ng-hide="loadData">
+        <li ng-if="tweets" ng-repeat="tweet in tweets track by $index">
+          {[ tweet ]}
         </li>
       </ul>
     </div><!-- /.col-lg-6 -->
 
     <!-- Wiki Results -->
     <div class="col-lg-6">
-      <h2 >Wikipedia</h2>
-      <h6 ng-if="error_message_wiki"><span class="glyphicon glyphicon-alert"></span> {[error_message_wiki]}</h6>
-       <ul class="pull-left">
+      <h3><i class="fa fa-3x fa-wikipedia-w"></i> Wikipedia</h3>
+      <h5 ng-if="error_message_wiki"><span class="glyphicon glyphicon-alert"></span> {[error_message_wiki]}</h5>
+      <div ng-if="!error_message_wiki" class="text-center" ng-show="loadData">
+        Loading.. <i class="fa fa-spinner fa-5x fa-spin"></i>
+      </div>
+      <ul ng-hide="loadData">
         <li ng-if="wiki_results" ng-repeat="wiki in wiki_results track by $index">
-          {[ wiki]}
+          {[ wiki.title]} <a href="{[wiki.url]}">{[wiki.url]}</a>
         </li>
       </ul>
     </div>
